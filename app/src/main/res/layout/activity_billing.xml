@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BillingActivity">
+
+    <FrameLayout
+        android:id="@+id/login_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/add_session_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/add_session_title"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_fragment" />
+
+    <Button
+        android:id="@+id/add_date_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/date_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_session_title" />
+
+    <View
+        android:id="@+id/date_billing_divider"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="?android:attr/listDivider"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/billing_header_textview"
+        app:layout_constraintTop_toBottomOf="@+id/add_date_button" />
+
+    <TextView
+        android:id="@+id/billing_header_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/billing_title"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_date_button" />
+
+    <EditText
+        android:id="@+id/card_name_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/card_name_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/billing_header_textview" />
+
+    <EditText
+        android:id="@+id/card_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/card_number_hint"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_name_edit_text" />
+
+    <EditText
+        android:id="@+id/card_month_edit_texteditText2"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/card_month_hint"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_number" />
+
+    <EditText
+        android:id="@+id/card_year_edit_text"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/card_year_hint"
+        android:inputType="date"
+        app:layout_constraintStart_toEndOf="@+id/card_month_edit_texteditText2"
+        app:layout_constraintTop_toBottomOf="@+id/card_number" />
+
+    <EditText
+        android:id="@+id/card_ccid_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/card_ccid_hint"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/card_year_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/card_number" />
+
+    <View
+        android:id="@+id/bottom_billing_divider"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_ccid_text_view" />
+
+    <RadioButton
+        android:id="@+id/print_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/print_box"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_billing_divider" />
+
+    <RadioButton
+        android:id="@+id/email_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/email_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_billing_divider" />
+
+    <EditText
+        android:id="@+id/email_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/email_box"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_radio" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/submit_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_text_view" />
+
+</android.support.constraint.ConstraintLayout>

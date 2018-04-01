@@ -3,8 +3,9 @@
     <string name="login_success">Login Successful!</string>
     <string name="login_failure">Incorrect username or password</string>
     <string name="user_name">jdoe</string>
-    <string name="password">welcome1</string>
+    <string name="password">welcome!</string>
     <string name="title_activity_user_login">Sign in</string>
+    <string name="current_user">Logged In:</string>
 
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
@@ -18,4 +19,27 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- Strings related to Customer Fragments -->
+    <string name="customer_name_label">Name</string>
+    <string name="session_label">Sessions</string>
+    <string name="complete_checkbox">Completed</string>
+    <string name="add_session_label">New Session</string>
+    <string name="customer_signature">Sign here to complete session.</string>
+    <string name="accept_button">Accept</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="customer_iamge_details">Customer Photo</string>
+
+    <!-- Add Session/Billing -->
+    <string name="add_session_title">Add Session</string>
+    <string name="date_button">Select a date</string>
+    <string name="billing_title">Billing Info.</string>
+    <string name="card_name_hint">Name on card</string>
+    <string name="card_number_hint">Card Number</string>
+    <string name="card_month_hint">MM</string>
+    <string name="card_year_hint">YY</string>
+    <string name="card_ccid_hint">CCID</string>
+    <string name="print_box">Print</string>
+    <string name="email_box">E-mail</string>
+    <string name="submit_button">Submit Payment</string>
 </resources>
