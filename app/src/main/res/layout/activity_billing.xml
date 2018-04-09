@@ -7,7 +7,7 @@
     tools:context=".BillingActivity">
 
     <FrameLayout
-        android:id="@+id/login_fragment"
+        android:id="@+id/login_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/login_fragment_container" />
 
     <Button
         android:id="@+id/add_date_button"

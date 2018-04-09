@@ -31,9 +31,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CustomerActivity" />
+        <activity
+            android:name=".PagerActivity"
+            android:parentActivityName=".CustomerListActivity"/>
         <activity android:name=".BillingActivity" />
         <activity android:name=".session_complete"></activity>
+        <activity android:name=".CustomerListActivity"></activity>
     </application>
 
 </manifest>

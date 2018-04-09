@@ -24,9 +24,11 @@ public class CustomerDB {
 
     private CustomerDB(Context context) {
         mCustomerList = new ArrayList<>();
-        Customer customer = new Customer();
-        customer.setName("Michael Fontecchio");
-        mCustomerList.add(customer);
+    }
+
+    //new Customer using FAB
+    public void addCustomer(Customer c) {
+        mCustomerList.add(c);
     }
 
     public List<Customer> getCustomerList(){

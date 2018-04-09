@@ -12,6 +12,7 @@ public class Customer {
     private UUID mId;
     private String mName;
     private Date mDate;
+    private String mPhoto;
     private boolean mCompleted;
 
     private List<String> mPrevSessions;
@@ -35,6 +36,14 @@ public class Customer {
 
     public Date getDate() {
         return mDate;
+    }
+
+    public String getPhoto() {
+        return mPhoto;
+    }
+
+    public void setPhoto(String photo) {
+        mPhoto = photo;
     }
 
     public void setDate(Date date) {

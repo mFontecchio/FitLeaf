@@ -18,4 +18,9 @@ public class LoginFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_logged_in, container, false);
         return v;
     }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+    }
 }

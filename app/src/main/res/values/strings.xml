@@ -42,4 +42,8 @@
     <string name="print_box">Print</string>
     <string name="email_box">E-mail</string>
     <string name="submit_button">Submit Payment</string>
+
+    <!-- Menu Items-->
+    <string name="menu_item_log_off">LogOff</string>
+    <string name="log_off_dialog">Logging You Off</string>
 </resources>
