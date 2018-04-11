@@ -1,10 +1,16 @@
 package com.bignerdeanch.android.fitleaf;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -41,6 +47,16 @@ public class CustomerFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID customerId = (UUID) getArguments().getSerializable(ARG_CUSTOMER_ID);
         mCustomer = CustomerDB.get(getActivity()).getCustomer(customerId);
+
+        setHasOptionsMenu(true);
+    }
+
+    //Push updates to customer
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        //CustomerDB.get(getActivity()).updateCustomer(mCustomer);
     }
 
     //Inflate layout
@@ -85,5 +101,40 @@ public class CustomerFragment extends Fragment {
         });
 
         return v;
+    }
+
+    //Menu Inflater
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_customer, menu);
+    }
+
+    //Menu Selection
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.save_customer:
+                //Push Update to DB
+                CustomerDB.get(getActivity()).updateCustomer(mCustomer);
+
+                //Pop user back
+                backtoMain();
+
+            case R.id.delete_customer:
+                CustomerDB.get(getActivity()).deleteCustomer(mCustomer);
+
+                backtoMain();
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void backtoMain() {
+        Intent intent = new Intent(getActivity(), CustomerListActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        getActivity().finish();
     }
 }

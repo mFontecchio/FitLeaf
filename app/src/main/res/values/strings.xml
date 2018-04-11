@@ -46,4 +46,8 @@
     <!-- Menu Items-->
     <string name="menu_item_log_off">LogOff</string>
     <string name="log_off_dialog">Logging You Off</string>
+
+    <!--Customer Menu-->
+    <string name="menu_item_save_customer">SAVE</string>
+    <string name="menu_item_delete_customer">Delete</string>
 </resources>

@@ -13,6 +13,7 @@ public class CustomerListActivity extends MultiFragmentActivity {
     @Override
     protected Fragment createFragment() {
 
+        //FAB
         FloatingActionButton fab = findViewById(R.id.fab_add_customer);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

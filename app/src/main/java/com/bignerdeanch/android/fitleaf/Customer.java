@@ -18,7 +18,11 @@ public class Customer {
     private List<String> mPrevSessions;
 
     public Customer() {
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Customer(UUID id) {
+        mId = id;
         mDate = new Date();
     }
 

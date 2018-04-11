@@ -99,6 +99,7 @@ public class CustomerListFragment extends Fragment{
             mAdapter = new CustomerAdapter(customers);
             mCustomerRecyclerView.setAdapter(mAdapter);
         } else {
+            mAdapter.setCustomers(customers);
             mAdapter.notifyItemChanged(mCustomerModifiedPosition);
             mCustomerModifiedPosition = RecyclerView.NO_POSITION;
         }
@@ -171,6 +172,11 @@ public class CustomerListFragment extends Fragment{
         @Override
         public int getItemCount() {
             return mCustomers.size();
+        }
+
+        //Update customers to the recycler adapter
+        public void setCustomers(List<Customer> customers) {
+            mCustomers = customers;
         }
     }
 }
