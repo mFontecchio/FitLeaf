@@ -52,12 +52,12 @@ public class CustomerFragment extends Fragment {
     }
 
     //Push updates to customer
-    @Override
+    /*@Override
     public void onPause() {
         super.onPause();
 
         //CustomerDB.get(getActivity()).updateCustomer(mCustomer);
-    }
+    }*/
 
     //Inflate layout
     @Override
@@ -120,11 +120,13 @@ public class CustomerFragment extends Fragment {
 
                 //Pop user back
                 backtoMain();
+                return true;
 
             case R.id.delete_customer:
                 CustomerDB.get(getActivity()).deleteCustomer(mCustomer);
 
                 backtoMain();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
