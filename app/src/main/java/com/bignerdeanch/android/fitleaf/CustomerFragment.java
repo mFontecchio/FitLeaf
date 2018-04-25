@@ -1,9 +1,17 @@
 package com.bignerdeanch.android.fitleaf;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,7 +25,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -27,11 +39,14 @@ public class CustomerFragment extends Fragment {
 
     //Static argument to pass
     private static final String ARG_CUSTOMER_ID = "customer_id";
+    private static final int REQUEST_PHOTO = 2;
 
     private Customer mCustomer;
     private EditText mCustomerNameField;
     private Button mNewSessionButton;
     private CheckBox mCompleteSessionCheckBox;
+    private ImageView mPhotoView;
+    private File mPhotoFile;
 
     public static CustomerFragment newInstance(UUID customerId) {
         Bundle args = new Bundle();
@@ -47,6 +62,7 @@ public class CustomerFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID customerId = (UUID) getArguments().getSerializable(ARG_CUSTOMER_ID);
         mCustomer = CustomerDB.get(getActivity()).getCustomer(customerId);
+        mPhotoFile = CustomerDB.get(getActivity()).getPhotoFile(mCustomer);
 
         setHasOptionsMenu(true);
     }
@@ -89,6 +105,13 @@ public class CustomerFragment extends Fragment {
 
         //Set up newSessionButton
         mNewSessionButton = (Button) v.findViewById(R.id.add_session_button);
+        mNewSessionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), BillingActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //Set up CompleteSessionCheckBox
         mCompleteSessionCheckBox = (CheckBox) v.findViewById(R.id.complete_session_checkbox);
@@ -99,6 +122,40 @@ public class CustomerFragment extends Fragment {
                 mCustomer.setCompleted(checked);
             }
         });
+
+        //PackageManager
+        PackageManager packageManager = getActivity().getPackageManager();
+
+        mPhotoView = (ImageView) v.findViewById(R.id.customer_image_details);
+
+        final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        boolean canTakePhoto = mPhotoFile != null && captureImage.resolveActivity(packageManager)
+                != null;
+        mPhotoView.setEnabled(canTakePhoto);
+
+        mPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = FileProvider.getUriForFile(getActivity(), "com.bignerdranch.android.fitleaf.fileprovider",
+                        mPhotoFile);
+                captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+                List<ResolveInfo> cameraActivities = getActivity().getPackageManager()
+                        .queryIntentActivities(captureImage, PackageManager.MATCH_DEFAULT_ONLY);
+
+                for (ResolveInfo activity : cameraActivities) {
+                    getActivity().grantUriPermission(activity.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                }
+                startActivityForResult(captureImage, REQUEST_PHOTO);
+            }
+        });
+
+
+
+        //ImageView
+        //mPhotoView = (ImageView) v.findViewById(R.id.customer_image_details);
+        updateCustomerPhoto();
 
         return v;
     }
@@ -138,5 +195,31 @@ public class CustomerFragment extends Fragment {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         getActivity().finish();
+    }
+
+    //Activity Result
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_PHOTO) {
+            Uri uri = FileProvider.getUriForFile(getActivity(), "com.bignerdranch.android.fitleaf.fileprovider",
+                    mPhotoFile);
+
+            getActivity().revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+            updateCustomerPhoto();
+        }
+    }
+
+    private void updateCustomerPhoto() {
+        if (mPhotoFile == null || !mPhotoFile.exists()) {
+            mPhotoView.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_client));
+        } else {
+            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+            mPhotoView.setImageBitmap(bitmap);
+        }
     }
 }

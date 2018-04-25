@@ -9,6 +9,7 @@ import com.bignerdeanch.android.fitleaf.database.CustomerBaseHelper;
 import com.bignerdeanch.android.fitleaf.database.CustomerCursorWrapper;
 import com.bignerdeanch.android.fitleaf.database.CustomerDBSchema.CustomerTable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -88,6 +89,12 @@ public class CustomerDB {
         values.put(CustomerTable.Columns.COMPLETED, customer.isCompleted());
 
         return values;
+    }
+
+    //Get Photo
+    public File getPhotoFile(Customer customer) {
+        File filesDir = mContext.getFilesDir();
+        return new File(filesDir, customer.getPhotoFilename());
     }
 
     //Update customer.

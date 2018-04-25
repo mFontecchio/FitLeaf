@@ -61,4 +61,8 @@ public class Customer {
     public void setCompleted(boolean completed) {
         mCompleted = completed;
     }
+
+    public String getPhotoFilename() {
+        return "IMG_" + getId().toString() + ".jpg";
+    }
 }

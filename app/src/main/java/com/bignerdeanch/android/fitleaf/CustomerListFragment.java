@@ -2,6 +2,7 @@ package com.bignerdeanch.android.fitleaf;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -118,6 +120,7 @@ public class CustomerListFragment extends Fragment{
 
         //Declare widgets for use in the recycler list details view
         private ImageView mCustomerImageView;
+        private File mPhotoFile;
         private TextView mCustomerNameTextView;
 
         //Customer item methods on create
@@ -136,7 +139,15 @@ public class CustomerListFragment extends Fragment{
         public void bind(Customer customer) {
             mCustomer = customer;
             //reserved to set mCustomerImageView src.
+            mPhotoFile = CustomerDB.get(getActivity()).getPhotoFile(mCustomer);
             mCustomerNameTextView.setText(mCustomer.getName());
+
+            if (mPhotoFile == null || !mPhotoFile.exists()) {
+                mCustomerImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_client));
+            } else {
+                Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+                mCustomerImageView.setImageBitmap(bitmap);
+            }
         }
 
         //OnClick event handler for list items.
